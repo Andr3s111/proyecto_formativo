@@ -9,6 +9,7 @@ import {
     TouchableWithoutFeedback,
     SafeAreaView,
     Modal,
+    Platform,
 } from "react-native";
 import { useRouter, usePathname } from "expo-router";
 import { Feather } from "@expo/vector-icons";
@@ -55,11 +56,10 @@ export default function AppDrawer({ isOpen, onClose }: DrawerProps) {
     const pathname = usePathname();
     const translateX = useRef(new Animated.Value(-DRAWER_W)).current;
 
-    // Animar cada vez que cambia isOpen
     React.useEffect(() => {
         Animated.spring(translateX, {
             toValue: isOpen ? 0 : -DRAWER_W,
-            useNativeDriver: true,
+            useNativeDriver: false, // ← false para compatibilidad web
             damping: 22,
             stiffness: 200,
         }).start();
@@ -71,8 +71,6 @@ export default function AppDrawer({ isOpen, onClose }: DrawerProps) {
     };
 
     return (
-        // Usamos Modal para que el drawer esté por ENCIMA de todo,
-        // incluso del header y del contenido del stack
         <Modal
             visible={isOpen}
             transparent
@@ -80,16 +78,16 @@ export default function AppDrawer({ isOpen, onClose }: DrawerProps) {
             onRequestClose={onClose}
             statusBarTranslucent
         >
-            {/* Backdrop oscuro */}
+            {/* Backdrop */}
             <TouchableWithoutFeedback onPress={onClose}>
                 <View style={s.backdrop} />
             </TouchableWithoutFeedback>
 
-            {/* Panel del drawer */}
+            {/* Panel */}
             <Animated.View style={[s.drawer, { transform: [{ translateX }] }]}>
                 <SafeAreaView style={{ flex: 1 }}>
 
-                    {/* ── Branding ── */}
+                    {/* Branding */}
                     <View style={s.drawerHeader}>
                         <View style={s.logoWrap}>
                             <View style={s.logoCircle}>
@@ -105,13 +103,13 @@ export default function AppDrawer({ isOpen, onClose }: DrawerProps) {
                         </TouchableOpacity>
                     </View>
 
-                    {/* ── Promo chip ── */}
+                    {/* Promo */}
                     <View style={s.promoChip}>
                         <Feather name="truck" size={13} color="#a06010" style={{ marginRight: 6 }} />
                         <Text style={s.promoTxt}>Envío gratis en compras +$100.000 COP</Text>
                     </View>
 
-                    {/* ── Nav principal ── */}
+                    {/* Nav principal */}
                     <Text style={s.groupLabel}>MENÚ</Text>
                     <View style={s.navList}>
                         {NAV_ITEMS.map((item) => {
@@ -124,34 +122,24 @@ export default function AppDrawer({ isOpen, onClose }: DrawerProps) {
                                     activeOpacity={0.7}
                                 >
                                     <View style={[s.navIconBox, active && s.navIconBoxActive]}>
-                                        <Feather
-                                            name={item.icon}
-                                            size={17}
-                                            color={active ? ORANGE : MUTED}
-                                        />
+                                        <Feather name={item.icon} size={17} color={active ? ORANGE : MUTED} />
                                     </View>
                                     <Text style={[s.navLabel, active && s.navLabelActive]}>
                                         {item.label}
                                     </Text>
-                                    {active && (
-                                        <Feather name="chevron-right" size={14} color={ORANGE} />
-                                    )}
+                                    {active && <Feather name="chevron-right" size={14} color={ORANGE} />}
                                 </TouchableOpacity>
                             );
                         })}
                     </View>
 
-                    {/* ── Divider ── */}
+                    {/* Divider */}
                     <View style={s.divider} />
                     <Text style={s.groupLabel}>AYUDA</Text>
 
                     <View style={s.navList}>
                         {EXTRA_ITEMS.map((item) => (
-                            <TouchableOpacity
-                                key={item.label}
-                                style={s.navItem}
-                                activeOpacity={0.7}
-                            >
+                            <TouchableOpacity key={item.label} style={s.navItem} activeOpacity={0.7}>
                                 <View style={s.navIconBox}>
                                     <Feather name={item.icon} size={17} color={MUTED} />
                                 </View>
@@ -160,7 +148,7 @@ export default function AppDrawer({ isOpen, onClose }: DrawerProps) {
                         ))}
                     </View>
 
-                    {/* ── Footer ── */}
+                    {/* Footer */}
                     <View style={s.footer}>
                         <Text style={s.footerTxt}>Sueños Dorados © 2025</Text>
                         <Text style={s.footerSub}>Hecho con amor en Colombia 🇨🇴</Text>
@@ -173,14 +161,11 @@ export default function AppDrawer({ isOpen, onClose }: DrawerProps) {
 }
 
 const s = StyleSheet.create({
-    // Backdrop cubre TODA la pantalla
     backdrop: {
         position: "absolute",
         top: 0, left: 0, right: 0, bottom: 0,
         backgroundColor: "rgba(45,37,32,0.45)",
     },
-
-    // Panel
     drawer: {
         position: "absolute",
         top: 0, left: 0, bottom: 0,
@@ -194,7 +179,6 @@ const s = StyleSheet.create({
         borderTopRightRadius: 24,
         borderBottomRightRadius: 24,
     },
-
     drawerHeader: {
         flexDirection: "row",
         alignItems: "center",
@@ -217,7 +201,6 @@ const s = StyleSheet.create({
         borderWidth: 1, borderColor: BORDER,
         alignItems: "center", justifyContent: "center",
     },
-
     promoChip: {
         flexDirection: "row",
         alignItems: "center",
@@ -228,12 +211,10 @@ const s = StyleSheet.create({
         borderWidth: 1, borderColor: "#f5d99a",
     },
     promoTxt: { fontSize: 12, color: "#8a6010", fontWeight: "600", flex: 1 },
-
     groupLabel: {
         paddingHorizontal: 20, marginBottom: 4,
         fontSize: 10, fontWeight: "700", color: MUTED, letterSpacing: 1.5,
     },
-
     navList: { paddingHorizontal: 12, gap: 1 },
     navItem: {
         flexDirection: "row", alignItems: "center",
@@ -250,12 +231,10 @@ const s = StyleSheet.create({
     navIconBoxActive: { backgroundColor: "#ffe8b8", borderColor: "#f5d99a" },
     navLabel: { fontSize: 14, fontWeight: "600", color: TEXT, flex: 1 },
     navLabelActive: { color: "#9a5c00", fontWeight: "700" },
-
     divider: {
         height: 1, backgroundColor: BORDER,
         marginHorizontal: 20, marginVertical: 14,
     },
-
     footer: {
         position: "absolute", bottom: 28,
         left: 0, right: 0,

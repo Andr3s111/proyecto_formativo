@@ -1,14 +1,16 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from "react-native";
-import { useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { useState } from "react";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+
+
 
 const FEATURED = [
   {
@@ -18,7 +20,7 @@ const FEATURED = [
     price: 85000,
     originalPrice: 110000,
     badge: "Más vendido",
-    image: "https://via.placeholder.com/400x300/fff3dc/f5a742?text=Edredon",
+    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400&q=80",
   },
   {
     id: "2",
@@ -27,7 +29,7 @@ const FEATURED = [
     price: 45000,
     originalPrice: 60000,
     badge: "Nuevo",
-    image: "https://via.placeholder.com/400x300/e8f0ff/5b9bd5?text=Cobija",
+    image: "https://images.unsplash.com/photo-1583845112203-29329902332e?w=400&q=80",
   },
   {
     id: "3",
@@ -36,7 +38,7 @@ const FEATURED = [
     price: 130000,
     originalPrice: 160000,
     badge: "Premium",
-    image: "https://via.placeholder.com/400x300/f5f0ff/9b72cf?text=Set+King",
+    image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400&q=80",
   },
 ];
 
@@ -46,28 +48,28 @@ const RECENT = [
     name: "Almohada Viscoelástica",
     price: 28000,
     originalPrice: null,
-    image: "https://via.placeholder.com/100x100/fff3dc/f5a742?text=Almohada",
+    image: "https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=200&q=80",
   },
   {
     id: "5",
     name: "Protector de Colchón",
     price: 19000,
     originalPrice: 25000,
-    image: "https://via.placeholder.com/100x100/fff3dc/f5a742?text=Protector",
+    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=200&q=80",
   },
   {
     id: "6",
     name: "Funda Nórdica 2 pzs",
     price: 35000,
     originalPrice: 42000,
-    image: "https://via.placeholder.com/100x100/fff3dc/f5a742?text=Funda",
+    image: "https://images.unsplash.com/photo-1616627547584-bf28cee262db?w=200&q=80",
   },
   {
     id: "7",
     name: "Cobija Bebé Fleece",
     price: 14000,
     originalPrice: null,
-    image: "https://via.placeholder.com/100x100/fff3dc/f5a742?text=Bebe",
+    image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=200&q=80",
   },
 ];
 
@@ -105,22 +107,7 @@ export default function Home() {
         contentContainerStyle={{ paddingBottom: 100 }}
       >
         {/* ── Hero ─────────────────────────────── */}
-        <View style={s.hero}>
-          <View style={s.heroLeft}>
-            <View style={s.heroChip}>
-              <Text style={s.heroChipTxt}>Invierno 2025</Text>
-            </View>
-            <Text style={s.heroTitle}>El descanso{"\n"}que merecés</Text>
-            <Text style={s.heroSub}>Hasta 30% off en toda la colección</Text>
-            <TouchableOpacity style={s.heroCta}>
-              <Text style={s.heroCtaTxt}>Ver colección</Text>
-              <Feather name="arrow-right" size={14} color="#fff" />
-            </TouchableOpacity>
-          </View>
-          <View style={s.heroRight}>
-            <Feather name="moon" size={52} color={ORANGE} style={{ opacity: 0.2 }} />
-          </View>
-        </View>
+        
 
         {/* ── Stats ────────────────────────────── */}
         <View style={s.statsRow}>
@@ -180,9 +167,7 @@ export default function Home() {
                 key={p.id}
                 style={s.featCard}
                 activeOpacity={0.9}
-                onPress={() => router.push("/(tabs)/(stacks)/product" as any)}
               >
-                {/* Imagen real */}
                 <View style={s.featImgWrap}>
                   <Image
                     source={{ uri: p.image }}
@@ -201,8 +186,6 @@ export default function Home() {
                     <Feather name="heart" size={13} color={MUTED} />
                   </TouchableOpacity>
                 </View>
-
-                {/* Info */}
                 <View style={s.featBody}>
                   <Text style={s.featName} numberOfLines={2}>{p.name}</Text>
                   <Text style={s.featDesc} numberOfLines={1}>{p.desc}</Text>
@@ -246,13 +229,7 @@ export default function Home() {
 
           <View style={{ gap: 10 }}>
             {RECENT.map((p) => (
-              <TouchableOpacity
-                key={p.id}
-                style={s.recentCard}
-                activeOpacity={0.8}
-                onPress={() => router.push("/(tabs)/(stacks)/product" as any)}
-              >
-                {/* Imagen real */}
+              <TouchableOpacity key={p.id} style={s.recentCard} activeOpacity={0.8}>
                 <Image
                   source={{ uri: p.image }}
                   style={s.recentThumb}
@@ -301,10 +278,7 @@ const s = StyleSheet.create({
     borderWidth: 1, borderColor: BORDER,
   },
   heroChipTxt: { fontSize: 11, fontWeight: "700", color: MUTED },
-  heroTitle: {
-    fontSize: 24, fontWeight: "900", color: TEXT,
-    lineHeight: 28, marginBottom: 8,
-  },
+  heroTitle: { fontSize: 24, fontWeight: "900", color: TEXT, lineHeight: 28, marginBottom: 8 },
   heroSub: { fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 18 },
   heroCta: {
     flexDirection: "row", alignItems: "center", gap: 6,
@@ -340,7 +314,7 @@ const s = StyleSheet.create({
   chipTxt: { fontSize: 13, fontWeight: "600", color: MUTED },
   chipTxtActive: { color: "#9a5c00", fontWeight: "700" },
 
-  // Section header
+  // Section
   secRow: {
     flexDirection: "row", justifyContent: "space-between", alignItems: "center",
     paddingHorizontal: 20, marginBottom: 14,
@@ -353,18 +327,11 @@ const s = StyleSheet.create({
   featCard: {
     width: 186,
     backgroundColor: CARD,
-    borderRadius: 18,
-    overflow: "hidden",
+    borderRadius: 18, overflow: "hidden",
     borderWidth: 1, borderColor: BORDER,
   },
-  featImgWrap: {
-    height: 160,
-    position: "relative",
-  },
-  featImg: {
-    width: "100%",
-    height: "100%",
-  },
+  featImgWrap: { height: 160, position: "relative" },
+  featImg: { width: "100%", height: "100%" },
   featBadge: {
     position: "absolute", top: 10, left: 10,
     backgroundColor: "rgba(255,255,255,0.92)",
