@@ -1,18 +1,17 @@
+import { Feather } from "@expo/vector-icons";
+import { usePathname, useRouter } from "expo-router";
 import React, { useRef } from "react";
 import {
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet,
     Animated,
     Dimensions,
-    TouchableWithoutFeedback,
-    SafeAreaView,
     Modal,
-    Platform,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    View
 } from "react-native";
-import { useRouter, usePathname } from "expo-router";
-import { Feather } from "@expo/vector-icons";
 
 const { width: SCREEN_W } = Dimensions.get("window");
 const DRAWER_W = SCREEN_W * 0.78;
@@ -31,7 +30,6 @@ const NAV_ITEMS: {
     route: string;
 }[] = [
         { label: "Inicio", icon: "home", route: "/(tabs)/(stacks)/" },
-        { label: "Explorar", icon: "search", route: "/(tabs)/explore" },
         { label: "Carrito", icon: "shopping-cart", route: "/(tabs)/cart" },
         { label: "Favoritos", icon: "heart", route: "/(tabs)/favorites" },
         { label: "Mis pedidos", icon: "package", route: "/(tabs)/orders" },
@@ -42,7 +40,6 @@ const EXTRA_ITEMS: {
     label: string;
     icon: React.ComponentProps<typeof Feather>["name"];
 }[] = [
-        { label: "Soporte", icon: "message-circle" },
         { label: "Configuración", icon: "settings" },
     ];
 

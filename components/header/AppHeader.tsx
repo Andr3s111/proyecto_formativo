@@ -6,9 +6,8 @@ import {
     StatusBar,
     StyleSheet,
     Text,
-    TextInput,
     TouchableOpacity,
-    View,
+    View
 } from "react-native";
 import AppDrawer from "../drawer/AppDrawer";
 
@@ -28,7 +27,6 @@ interface AppHeaderProps {
 export default function AppHeader({ showSearch = true, title }: AppHeaderProps) {
     const router = useRouter();
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [search, setSearch] = useState("");
 
     return (
         <>
@@ -69,39 +67,19 @@ export default function AppHeader({ showSearch = true, title }: AppHeaderProps) 
                         >
                             <Feather name="user" size={18} color={MUTED} />
                         </TouchableOpacity>
-
-                        {/* Favoritos */}
-                        <TouchableOpacity style={s.iconBtn} activeOpacity={0.7}>
-                            <Feather name="heart" size={18} color={MUTED} />
-                        </TouchableOpacity>
-
-                        {/* Carrito */}
-                        <TouchableOpacity style={[s.iconBtn, s.cartBtn]} activeOpacity={0.7}>
-                            <Feather name="shopping-cart" size={18} color={ORANGE} />
-                            <View style={s.badge}>
-                                <Text style={s.badgeTxt}>2</Text>
-                            </View>
-                        </TouchableOpacity>
                     </View>
                 </View>
 
                 {/* Buscador */}
                 {showSearch && (
-                    <View style={s.searchWrap}>
+                    <TouchableOpacity
+                        style={s.searchWrap}
+                        activeOpacity={0.7}
+                        onPress={() => router.push("/(tabs)/explore" as any)}
+                    >
                         <Feather name="search" size={15} color={MUTED} style={{ marginRight: 10 }} />
-                        <TextInput
-                            value={search}
-                            onChangeText={setSearch}
-                            placeholder="Buscar edredones, cobijas..."
-                            placeholderTextColor={MUTED}
-                            style={s.searchInput}
-                        />
-                        {search.length > 0 && (
-                            <TouchableOpacity onPress={() => setSearch("")}>
-                                <Feather name="x" size={16} color={MUTED} />
-                            </TouchableOpacity>
-                        )}
-                    </View>
+                        <Text style={s.searchPlaceholder}>Buscar edredones, cobijas...</Text>
+                    </TouchableOpacity>
                 )}
             </View>
         </>
@@ -156,5 +134,5 @@ const s = StyleSheet.create({
         borderRadius: 12,
         paddingHorizontal: 14, paddingVertical: 11,
     },
-    searchInput: { flex: 1, fontSize: 14, color: TEXT },
+    searchPlaceholder: { flex: 1, fontSize: 14, color: MUTED },
 });

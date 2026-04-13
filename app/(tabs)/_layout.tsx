@@ -1,6 +1,6 @@
-import { Tabs } from "expo-router";
-import { View, Text, StyleSheet } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import { StyleSheet, Text, View } from "react-native";
 
 const BG = "#fffdf9";
 const ORANGE = "#f5a742";
@@ -20,7 +20,12 @@ function TabIcon({
   return (
     <View style={[t.wrap, focused && t.wrapActive]}>
       <Feather name={icon} size={20} color={focused ? ORANGE : MUTED} />
-      <Text style={[t.label, focused && t.labelActive]}>{label}</Text>
+      <Text
+      style={[t.label, focused && t.labelActive]}
+      numberOfLines={1}
+      adjustsFontSizeToFit
+    >
+      {label}</Text>
     </View>
   );
 }
@@ -46,9 +51,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          tabBarIcon: ({ focused }) => (
-            <TabIcon icon="search" label="Explorar" focused={focused} />
-          ),
+          href: null,
         }}
       />
       <Tabs.Screen
@@ -104,20 +107,20 @@ const t = StyleSheet.create({
     backgroundColor: BG,
     borderTopWidth: 1,
     borderTopColor: BORDER,
-    height: 72,
-    paddingBottom: 0,
-    paddingTop: 0,
+    height: 64,
+    paddingBottom: 8,
+    paddingTop: 8,
     elevation: 0,
     shadowOpacity: 0,
   },
   wrap: {
     alignItems: "center",
     justifyContent: "center",
-    gap: 4,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
+    gap: 3,
+    paddingHorizontal: 8,
+    paddingVertical: 5,
     borderRadius: 12,
-    minWidth: 56,
+    minWidth: 64,
   },
   wrapActive: { backgroundColor: AMBER },
   label: { fontSize: 10, fontWeight: "500", color: MUTED },
