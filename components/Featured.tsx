@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity, ScrollView, Image, StyleSheet } from 'react-native';
-import React from 'react';
 import { Feather } from '@expo/vector-icons';
+import React from 'react';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 // Importamos los colores de tu tema
 const { CARD, BORDER, TEXT, MUTED, ORANGE } = require('../constants/theme').Colors.light;
