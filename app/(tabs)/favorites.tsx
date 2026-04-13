@@ -5,7 +5,7 @@ import AppHeader from "../../components/header/AppHeader";
 export default function Favorites() {
     return (
         <View style={s.root}>
-            <AppHeader showSearch={false} title="Favoritos" />
+            <AppHeader title="Favoritos" />
             <View style={s.center}>
                 <View style={s.iconWrap}>
                     <Feather name="heart" size={32} color="#f5a742" />

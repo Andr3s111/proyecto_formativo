@@ -1,6 +1,6 @@
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AppHeader from "../../components/header/AppHeader";
 
 const MENU = [
@@ -20,54 +20,56 @@ export default function Profile() {
             <AppHeader showSearch={false} title="Mi perfil" />
             <View style={{ paddingHorizontal: 20, paddingTop: 24 }}>
 
-                {/* Avatar */}
-                <View style={s.avatarRow}>
-                    <View style={s.avatar}>
-                        <Feather name="user" size={32} color="#f5a742" />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                        <Text style={s.name}>Invitado</Text>
-                        <Text style={s.email}>Iniciá sesión para continuar</Text>
-                    </View>
-                    <TouchableOpacity
-                        style={s.editBtn}
-                        onPress={() => router.push("/(tabs)/register" as any)}
-                    >
-                        <Feather name="user-plus" size={14} color="#f5a742" />
-                    </TouchableOpacity>
-                </View>
-
-                {/* Banner registro */}
-                <TouchableOpacity
-                    style={s.registerBanner}
-                    onPress={() => router.push("/(tabs)/register" as any)}
-                    activeOpacity={0.85}
-                >
-                    <View style={s.registerBannerLeft}>
-                        <Feather name="moon" size={18} color="#f5a742" />
-                        <View>
-                            <Text style={s.registerBannerTitle}>Crea tu cuenta</Text>
-                            <Text style={s.registerBannerSub}>Accede a todos los beneficios</Text>
+                <ScrollView>
+                    {/* Avatar */}
+                    <View style={s.avatarRow}>
+                        <View style={s.avatar}>
+                            <Feather name="user" size={32} color="#f5a742" />
                         </View>
-                    </View>
-                    <Feather name="chevron-right" size={16} color="#f5a742" />
-                </TouchableOpacity>
-
-                {/* Menú */}
-                <View style={s.menuCard}>
-                    {MENU.map((item, i) => (
+                        <View style={{ flex: 1 }}>
+                            <Text style={s.name}>Invitado</Text>
+                            <Text style={s.email}>Iniciá sesión para continuar</Text>
+                        </View>
                         <TouchableOpacity
-                            key={item.label}
-                            style={[s.menuItem, i < MENU.length - 1 && s.menuBorder]}
+                            style={s.editBtn}
+                            onPress={() => router.push("/(tabs)/register" as any)}
                         >
-                            <View style={s.menuIcon}>
-                                <Feather name={item.icon} size={17} color="#f5a742" />
-                            </View>
-                            <Text style={s.menuLabel}>{item.label}</Text>
-                            <Feather name="chevron-right" size={15} color="#c0b4a4" />
+                            <Feather name="user-plus" size={14} color="#f5a742" />
                         </TouchableOpacity>
-                    ))}
-                </View>
+                    </View>
+
+                    {/* Banner registro */}
+                    <TouchableOpacity
+                        style={s.registerBanner}
+                        onPress={() => router.push("/(tabs)/register" as any)}
+                        activeOpacity={0.85}
+                    >
+                        <View style={s.registerBannerLeft}>
+                            <Feather name="moon" size={18} color="#f5a742" />
+                            <View>
+                                <Text style={s.registerBannerTitle}>Crea tu cuenta</Text>
+                                <Text style={s.registerBannerSub}>Accede a todos los beneficios</Text>
+                            </View>
+                        </View>
+                        <Feather name="chevron-right" size={16} color="#f5a742" />
+                    </TouchableOpacity>
+
+                    {/* Menú */}
+                    <View style={s.menuCard}>
+                        {MENU.map((item, i) => (
+                            <TouchableOpacity
+                                key={item.label}
+                                style={[s.menuItem, i < MENU.length - 1 && s.menuBorder]}
+                            >
+                                <View style={s.menuIcon}>
+                                    <Feather name={item.icon} size={17} color="#f5a742" />
+                                </View>
+                                <Text style={s.menuLabel}>{item.label}</Text>
+                                <Feather name="chevron-right" size={15} color="#c0b4a4" />
+                            </TouchableOpacity>
+                        ))}
+                    </View>
+                </ScrollView>
             </View>
         </View>
     );

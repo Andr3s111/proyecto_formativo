@@ -7,7 +7,6 @@ export default function StackLayout() {
       screenOptions={{
         header: () => <AppHeader showSearch={true} />,
         contentStyle: { backgroundColor: "#fffdf9" },
-        animation: "slide_from_right",
       }}
     >
       {/* ── Única pantalla que existe por ahora ── */}

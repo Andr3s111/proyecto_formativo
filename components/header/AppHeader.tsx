@@ -1,3 +1,4 @@
+
 import { Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -69,12 +70,12 @@ export default function AppHeader({ showSearch = true, title }: AppHeaderProps) 
                             <Feather name="user" size={18} color={MUTED} />
                         </TouchableOpacity>
 
-                        {/* ❤️ Favoritos */}
+                        {/* Favoritos */}
                         <TouchableOpacity style={s.iconBtn} activeOpacity={0.7}>
                             <Feather name="heart" size={18} color={MUTED} />
                         </TouchableOpacity>
 
-                        {/* 🛒 Carrito */}
+                        {/* Carrito */}
                         <TouchableOpacity style={[s.iconBtn, s.cartBtn]} activeOpacity={0.7}>
                             <Feather name="shopping-cart" size={18} color={ORANGE} />
                             <View style={s.badge}>

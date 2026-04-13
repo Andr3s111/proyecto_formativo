@@ -51,3 +51,12 @@ export const Fonts = Platform.select({
     mono: "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
   },
 });
+
+
+export const BG = "#fffdf9";
+export const CARD = "#ffffff";
+export const BORDER = "#ede8e0";
+export const TEXT = "#2d2520";
+export const MUTED = "#b0a090";
+export const ORANGE = "#f5a742";
+export const AMBER = "#fff3dc";

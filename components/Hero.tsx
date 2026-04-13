@@ -3,7 +3,7 @@ import React from 'react'
 import { Feather } from '@expo/vector-icons'
 import { StyleSheet } from 'react-native'
 
-const { AMBER, BORDER, MUTED, ORANGE, TEXT } = require('../constants/theme').Colors.light;
+const { AMBER, BORDER, MUTED, ORANGE, TEXT } = require('../constants/theme');
 
 const Hero = () => {
     return (
@@ -20,7 +20,7 @@ const Hero = () => {
                 </TouchableOpacity>
             </View>
             <View style={s.heroRight}>
-                <Feather name="moon" size={52} color={'#ca8628'} style={{ opacity: 0.2 }} />
+                <Feather name="moon" size={52} color={ORANGE} style={{ opacity: 0.2 }} />
             </View>
         </View>
     )
@@ -45,6 +45,7 @@ const s = StyleSheet.create({
         marginBottom: 10,
         borderWidth: 1, borderColor: BORDER,
     },
+
     heroChipTxt: { fontSize: 11, fontWeight: "700", color: MUTED },
     heroTitle: { fontSize: 24, fontWeight: "900", color: TEXT, lineHeight: 28, marginBottom: 8 },
     heroSub: { fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 18 },
@@ -57,8 +58,6 @@ const s = StyleSheet.create({
     },
     heroCtaTxt: { color: "#fff", fontSize: 13, fontWeight: "700" },
 })
-
-
 
 
 export default Hero
